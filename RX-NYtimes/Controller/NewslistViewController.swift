@@ -44,9 +44,9 @@ class NewslistViewController: UIViewController, UITableViewDelegate {
             vc.byLine = article.byline
             vc.abstrack1 = article.abstract
             vc.keyword = article.adx_keywords
-            vc.imagelink = article.media?.first?.metadata.first?.url ?? "https://1000logos.net/wp-content/uploads/2017/04/Symbol-New-York-Times.png"
+            vc.imagelink = article.media?.first?.metadata[2].url ?? "https://1000logos.net/wp-content/uploads/2017/04/Symbol-New-York-Times.png"
             self.navigationController?.pushViewController(vc, animated: true)
-        }
+        }.disposed(by: bag)
         newslistViewModel.fetchdata()
     }
 

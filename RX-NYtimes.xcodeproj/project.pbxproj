@@ -122,7 +122,6 @@
 			children = (
 				04C5DFF0273E65080096342C /* Controller */,
 				04C5DFE9273E60B70096342C /* View */,
-				04C5DFE6273E5ACA0096342C /* ViewModel */,
 				04C5DFDF273E59450096342C /* Service */,
 				04C5DFDE273E58F80096342C /* Model */,
 				04C5DFAE273E53190096342C /* AppDelegate.swift */,
@@ -167,13 +166,6 @@
 				04C5DFE2273E59A80096342C /* NewsRepo.swift */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		04C5DFE6273E5ACA0096342C /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		04C5DFE9273E60B70096342C /* View */ = {
