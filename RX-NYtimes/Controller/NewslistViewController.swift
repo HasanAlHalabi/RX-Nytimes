@@ -54,14 +54,5 @@ class NewslistViewController: UIViewController, UITableViewDelegate {
     
 }
 
-struct NewslistViewModel{
-    let articles = PublishSubject<[Post]>()
-    var newfetchdata = NewsRepoApi()
-    func fetchdata(){
-        newfetchdata.fetchallData{ result in
-            articles.onNext(result)
-            articles.onCompleted()
-        }
-    }
-}
+
 
