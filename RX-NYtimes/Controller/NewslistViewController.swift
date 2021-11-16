@@ -66,6 +66,9 @@ class NewslistViewController: UIViewController, UITableViewDelegate, UITableView
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as! MessageCell
+        
+        
+        
         cell .imagev.load(urlString: newslistViewModel.articlesVM[indexPath.row].imageurl)
         cell.titleLable.text = newslistViewModel.articlesVM[indexPath.row].title
         cell.ByName.text = newslistViewModel.articlesVM[indexPath.row].byLine
