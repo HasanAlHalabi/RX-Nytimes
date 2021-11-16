@@ -12,8 +12,6 @@ import RxSwift
 
 class NewslistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
  
-    
-   
     var newslistViewModel : NewslistViewModel!
     var bag = DisposeBag()
     var newfetchdata = NewsRepoApi()
@@ -41,6 +39,10 @@ class NewslistViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
 //    func bindListData(){
+//        tableView.rx.modelSelected(newslistViewModel.articlesVM).bind{articles in
+//
+//        }
+//    }
 //        newslistViewModel.articles.bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)){ row,iten, cell in
 //
 //            cell.titleLable.text = iten.title
@@ -67,10 +69,12 @@ class NewslistViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as! MessageCell
         
-        
-        
+        let articleVM = newslistViewModel.articlesVM[indexPath.row]
+        articleVM.title.asDriver(onErrorJustReturn: "")
+        .drive(cell.titleLable.rx.text)
+        .disposed(by: bag)
         cell .imagev.load(urlString: newslistViewModel.articlesVM[indexPath.row].imageurl)
-        cell.titleLable.text = newslistViewModel.articlesVM[indexPath.row].title
+//        cell.titleLable.text = newslistViewModel.articlesVM[indexPath.row].title
         cell.ByName.text = newslistViewModel.articlesVM[indexPath.row].byLine
         cell.DateText.text = newslistViewModel.articlesVM[indexPath.row].publishdate
         return cell
@@ -88,7 +92,14 @@ class NewslistViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       let  selectednews = self.newslistViewModel.newsAtindex(indexPath.row)
         let vc = storyboard?.instantiateViewController(withIdentifier: "DetailsNews")as! DetailsViewController
-               vc.titletext1 = selectednews.title
+        selectednews.title.bind(onNext: {titletext in
+            vc.titletext1 = titletext
+        }).disposed(by: bag)
+        
+//        vc.titletext1 = selectednews.title
+//        selectednews.title.asDriver(onErrorJustReturn: "")
+//            .drive(vc.titletext1).disposed(by: bag)
+//               vc.titletext1 = selectednews.title
         vc.abstrack1 = selectednews.abstract
         vc.byLine = selectednews.byLine
         vc.imagelink = selectednews.thumb

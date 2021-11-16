@@ -34,8 +34,8 @@ struct NewsModel{
     }
 }
 extension NewsModel{
-    var title : String{
-        return article.title
+    var title : Observable<String>{
+        return Observable<String>.just(article.title) 
     }
     var byLine : String{
         return article.byline
