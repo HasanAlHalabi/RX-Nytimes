@@ -20,51 +20,36 @@ class NewslistViewController: UIViewController, UITableViewDelegate, UITableView
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-       fetchdata()
+       fetchdata(selected: 1)
         tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
         tableView.separatorColor = UIColor.darkGray
         tableView.separatorInset = .zero
         navigationItem.title="Ny Time Most Popular Article"
-//        bindListData()
-        // Do any additional setup after loading the view.
+
     }
-    
-    func fetchdata(){
+    @IBAction func didChangeSegment(_ sender : UISegmentedControl){
+        if sender.selectedSegmentIndex == 0 {
+            fetchdata(selected: 1)
+        }
+        else if sender.selectedSegmentIndex == 1 {
+            fetchdata(selected: 7)
+        }else {
+            fetchdata(selected: 30)
+        }
+            
         
-        newfetchdata.fetchallData{ result in
+    }
+    func fetchdata(selected : Int){
+        
+        newfetchdata.fetchallData(nb: selected){ result in
             self.newslistViewModel = NewslistViewModel(result)
             DispatchQueue.main.async {
                self.tableView.reloadData()
             }
         }
     }
-//    func bindListData(){
-//        tableView.rx.modelSelected(newslistViewModel.articlesVM).bind{articles in
-//
-//        }
-//    }
-//        newslistViewModel.articles.bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)){ row,iten, cell in
-//
-//            cell.titleLable.text = iten.title
-//            cell.ByName.text = iten.byline
-//            cell.DateText.text = iten.published_date
-//            let mediaMetaData = iten.media?.first?.metadata
-//
-//            cell.imagev.load(urlString: mediaMetaData?.first?.url ?? "https://1000logos.net/wp-content/uploads/2017/04/Symbol-New-York-Times.png")
-//        }.disposed(by: bag)
-//        tableView.rx.modelSelected(Post.self).bind{
-//            article in
-//            let vc = self.storyboard?.instantiateViewController(withIdentifier: "DetailsNews")as! DetailsViewController
-//            vc.titletext1 = article.title
-//            vc.updated = article.updated
-//            vc.byLine = article.byline
-//            vc.abstrack1 = article.abstract
-//            vc.keyword = article.adx_keywords
-//            vc.imagelink = article.media?.first?.metadata[2].url ?? "https://1000logos.net/wp-content/uploads/2017/04/Symbol-New-York-Times.png"
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }.disposed(by: bag)
-//
-//    }
+
+
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as! MessageCell
@@ -96,10 +81,7 @@ class NewslistViewController: UIViewController, UITableViewDelegate, UITableView
             vc.titletext1 = titletext
         }).disposed(by: bag)
         
-//        vc.titletext1 = selectednews.title
-//        selectednews.title.asDriver(onErrorJustReturn: "")
-//            .drive(vc.titletext1).disposed(by: bag)
-//               vc.titletext1 = selectednews.title
+
         vc.abstrack1 = selectednews.abstract
         vc.byLine = selectednews.byLine
         vc.imagelink = selectednews.thumb

@@ -9,9 +9,9 @@ import Foundation
 class NewsRepoApi: ObservableObject {
 
 
-    func fetchallData(comp : @escaping ([Post])->()) {
+    func fetchallData(nb: Int ,comp : @escaping ([Post])->()) {
     
-    if let url = URL(string: "https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/7.json?api-key=An55tTl23wCgXd2jASDZIxvdYT55fhI7") {
+    if let url = URL(string: "https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/\(nb).json?api-key=An55tTl23wCgXd2jASDZIxvdYT55fhI7") {
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) { (data, response, error) in
             if error == nil {
