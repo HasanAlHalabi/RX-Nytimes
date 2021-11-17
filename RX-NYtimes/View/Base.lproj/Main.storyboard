@@ -19,7 +19,7 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="5bm-F9-pxn">
                                 <rect key="frame" x="10" y="88" width="394" height="32"/>
                                 <segments>
-                                    <segment title="1 day"/>
+                                    <segment title="Last 24h"/>
                                     <segment title="Last Week"/>
                                     <segment title="Last Month"/>
                                 </segments>
