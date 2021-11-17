@@ -18,7 +18,9 @@ class MessageCell: UITableViewCell {
     @IBOutlet weak var ByName: UILabel!
     
     
-   
+    override func prepareForReuse() {
+        imagev.image = nil
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()

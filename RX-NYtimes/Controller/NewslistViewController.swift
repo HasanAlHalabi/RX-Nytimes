@@ -30,11 +30,14 @@ class NewslistViewController: UIViewController, UITableViewDelegate, UITableView
     @IBAction func didChangeSegment(_ sender : UISegmentedControl){
         if sender.selectedSegmentIndex == 0 {
             fetchdata(selected: 1)
+            tableView.setContentOffset(.zero, animated:true)
         }
         else if sender.selectedSegmentIndex == 1 {
             fetchdata(selected: 7)
+            tableView.setContentOffset(.zero, animated:true)
         }else {
             fetchdata(selected: 30)
+            tableView.setContentOffset(.zero, animated:true)
         }
             
         
@@ -45,6 +48,7 @@ class NewslistViewController: UIViewController, UITableViewDelegate, UITableView
             self.newslistViewModel = NewslistViewModel(result)
             DispatchQueue.main.async {
                self.tableView.reloadData()
+               
             }
         }
     }
@@ -88,6 +92,7 @@ class NewslistViewController: UIViewController, UITableViewDelegate, UITableView
         vc.updated = selectednews.updated
                navigationController?.pushViewController(vc, animated: true)
     }
+    
     
 }
 

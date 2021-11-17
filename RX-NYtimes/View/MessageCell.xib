@@ -24,15 +24,14 @@
                         <imageReference key="image" image="AppIcon" symbolScale="medium"/>
                     </imageView>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="g3D-UB-HpF">
-                        <rect key="frame" x="150" y="101" width="265" height="20"/>
+                        <rect key="frame" x="220" y="101" width="195" height="32"/>
                         <subviews>
-                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="20" verticalHuggingPriority="20" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAU-BG-lcy">
-                                <rect key="frame" x="0.0" y="1" width="231" height="17.5"/>
-                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAU-BG-lcy">
+                                <rect key="frame" x="0.0" y="1" width="21" height="29.5"/>
                                 <imageReference key="image" image="calendar" catalog="system" symbolScale="default"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLK-MH-2in">
-                                <rect key="frame" x="234" y="0.0" width="31" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zLK-MH-2in">
+                                <rect key="frame" x="24" y="0.0" width="171" height="32"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -58,10 +57,10 @@
                     <constraint firstItem="zrf-Bz-itb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="HFA-nc-O59"/>
                     <constraint firstItem="xW7-Fr-RM4" firstAttribute="leading" secondItem="zrf-Bz-itb" secondAttribute="leading" id="LQy-gc-Cac"/>
                     <constraint firstItem="g3D-UB-HpF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="101" id="OON-hh-ge0"/>
-                    <constraint firstItem="g3D-UB-HpF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="150" id="glQ-T5-SAf"/>
+                    <constraint firstItem="g3D-UB-HpF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="220" id="glQ-T5-SAf"/>
                     <constraint firstItem="zrf-Bz-itb" firstAttribute="leading" secondItem="4lC-7h-oBV" secondAttribute="trailing" constant="8" symbolic="YES" id="hGh-ot-Cxh"/>
                     <constraint firstItem="xW7-Fr-RM4" firstAttribute="trailing" secondItem="zrf-Bz-itb" secondAttribute="trailing" id="k9C-Dk-5Gb"/>
-                    <constraint firstAttribute="bottom" secondItem="g3D-UB-HpF" secondAttribute="bottom" constant="12" id="tMy-KT-Mqm"/>
+                    <constraint firstAttribute="bottom" secondItem="g3D-UB-HpF" secondAttribute="bottom" id="tMy-KT-Mqm"/>
                     <constraint firstAttribute="trailing" secondItem="zrf-Bz-itb" secondAttribute="trailing" constant="40" id="u52-QD-NCO"/>
                 </constraints>
             </tableViewCellContentView>
