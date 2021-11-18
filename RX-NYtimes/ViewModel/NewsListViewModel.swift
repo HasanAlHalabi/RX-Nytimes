@@ -16,17 +16,19 @@ class NewsListViewModel{
         case serverMessage (String)
     }
     public let news : PublishSubject<[Post]> = PublishSubject()
-    public let loading : PublishSubject<Bool> = PublishSubject()
+    
     public let error : PublishSubject<homeError> = PublishSubject()
 
     private let disposable = DisposeBag()
    
     public func requestData(time: Int){
-    self.loading.onNext(true)
+    
     self.newfetchdata.fetchallData(nb: time){articles in
         self.news.onNext(articles)
     }
        
        
 }
+    
+    
 }

@@ -13,7 +13,7 @@ import RxSwift
 class NewslistViewController: UIViewController, UITableViewDelegate{
    
     
-    var newslistViewModel = NewsListViewModel()
+    var NewListVM = NewsListViewModel()
        var bag = DisposeBag()
     
    
@@ -51,19 +51,19 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as! MessageCell
         if sender.selectedSegmentIndex == 0 {
             cell.imagev = nil
-            newslistViewModel.requestData(time: 1)
+            NewListVM.requestData(time: 1)
             tableView.setContentOffset(.zero, animated:true)
             
         }
         else if sender.selectedSegmentIndex == 1 {
             cell.imagev = nil
-            newslistViewModel.requestData(time: 7)
+            NewListVM.requestData(time: 7)
             tableView.setContentOffset(.zero, animated:true)
             
             
         }else {
             cell.imagev = nil
-            newslistViewModel.requestData(time: 30)
+            NewListVM.requestData(time: 30)
             tableView.setContentOffset(.zero, animated:true)
           
         }
@@ -72,9 +72,9 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
     }
     //        MARK: - BINDING
     private func setupBinding(){
-        newslistViewModel.requestData(time: 1)
+        NewListVM.requestData(time: 1)
         
-        newslistViewModel.news.bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)){ row,iten, cell in
+        NewListVM.news.bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)){ row,iten, cell in
             cell.news = iten
                 }.disposed(by: bag)
        
