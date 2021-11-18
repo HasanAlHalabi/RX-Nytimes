@@ -8,54 +8,25 @@
 import Foundation
 import RxCocoa
 import RxSwift
+class NewsListViewModel{
+    var newfetchdata = NewsRepoApi()
+    
+    public enum homeError {
+        case internetError (String)
+        case serverMessage (String)
+    }
+    public let news : PublishSubject<[Post]> = PublishSubject()
+    public let loading : PublishSubject<Bool> = PublishSubject()
+    public let error : PublishSubject<homeError> = PublishSubject()
 
-struct NewslistViewModel{
-    let articlesVM : [NewsModel]
-    func numberOfRowsInSection(_ section: Int)-> Int{
-           return self.articlesVM.count
-       }
-    func newsAtindex(_ index: Int ) -> NewsModel{
-            let news = self.articlesVM[index]
-        return NewsModel(news.article)
-        }
-    var numberOfSections : Int {
-           return 1
-       }
+    private let disposable = DisposeBag()
+   
+    public func requestData(time: Int){
+    self.loading.onNext(true)
+    self.newfetchdata.fetchallData(nb: time){articles in
+        self.news.onNext(articles)
+    }
+       
+       
 }
-extension NewslistViewModel{
-    init(_ articles: [Post]){
-        self.articlesVM = articles.compactMap(NewsModel.init)
-    }
-}
-struct NewsModel{
-    let article : Post
-    init(_ article : Post){
-        self.article = article
-    }
-}
-extension NewsModel{
-    var title : Observable<String>{
-        return Observable<String>.just(article.title) 
-    }
-    var byLine : String{
-        return article.byline
-    }
-    var updated : String{
-        return article.updated
-    }
-    var imageurl : String{
-        return article.media?.first?.metadata[0].url ?? "https://1000logos.net/wp-content/uploads/2017/04/Symbol-New-York-Times.png"
-    }
-    var thumb : String{
-        return article.media?.first?.metadata[2].url ?? "https://1000logos.net/wp-content/uploads/2017/04/Symbol-New-York-Times.png"
-    }
-    var publishdate : String{
-        return article.published_date
-    }
-    var keys : String{
-        return article.adx_keywords
-    }
-    var abstract : String{
-        return article.abstract
-    }
 }
