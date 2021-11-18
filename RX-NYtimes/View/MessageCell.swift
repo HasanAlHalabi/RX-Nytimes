@@ -14,7 +14,7 @@ class MessageCell: UITableViewCell {
    
     @IBOutlet weak var imagev: UIImageView!
     @IBOutlet weak var DateText: UILabel!
-    @IBOutlet weak var leftImagevide: UIImageView!
+   
     @IBOutlet weak var ByName: UILabel!
     
     override func prepareForReuse() {
@@ -26,7 +26,7 @@ class MessageCell: UITableViewCell {
             self.titleLable.text = news.title
             self.DateText.text = news.published_date
             self.ByName.text = news.byline
-            self.leftImagevide.load(urlString:  news.media?.first?.metadata[0].url ?? "https://1000logos.net/wp-content/uploads/2017/04/Symbol-New-York-Times.png")
+            
         }
     }
    

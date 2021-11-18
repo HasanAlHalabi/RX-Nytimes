@@ -12,7 +12,7 @@ import RxSwift
 
 class NewslistViewController: UIViewController, UITableViewDelegate{
    
-    
+    let alert = UIAlertController(title: nil, message: "Please wait...", preferredStyle: .alert)
     var NewListVM = NewsListViewModel()
        var bag = DisposeBag()
     
@@ -21,6 +21,15 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+
+        let loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.gray
+        loadingIndicator.startAnimating();
+
+        alert.view.addSubview(loadingIndicator)
+        present(alert, animated: true, completion: nil)
         setupBinding()
         tableView.delegate = self
         tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
@@ -50,18 +59,21 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
     @IBAction func didChangeSegment(_ sender : UISegmentedControl){
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as! MessageCell
         if sender.selectedSegmentIndex == 0 {
+            self.present(self.alert, animated: true, completion: nil)
             cell.imagev = nil
             NewListVM.requestData(time: 1)
             tableView.setContentOffset(.zero, animated:true)
             
         }
         else if sender.selectedSegmentIndex == 1 {
+            self.present(self.alert, animated: true, completion: nil)
             cell.imagev = nil
             NewListVM.requestData(time: 7)
             tableView.setContentOffset(.zero, animated:true)
             
             
         }else {
+            self.present(self.alert, animated: true, completion: nil)
             cell.imagev = nil
             NewListVM.requestData(time: 30)
             tableView.setContentOffset(.zero, animated:true)
@@ -76,6 +88,8 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
         
         NewListVM.news.bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)){ row,iten, cell in
             cell.news = iten
+            self.dismiss(animated: false, completion: nil)
+
                 }.disposed(by: bag)
        
     }

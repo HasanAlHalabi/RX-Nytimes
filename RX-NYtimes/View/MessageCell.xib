@@ -69,7 +69,6 @@
                 <outlet property="ByName" destination="xW7-Fr-RM4" id="X1f-sv-0ft"/>
                 <outlet property="DateText" destination="zLK-MH-2in" id="IbQ-4F-z9z"/>
                 <outlet property="imagev" destination="4lC-7h-oBV" id="H2J-Ej-s5N"/>
-                <outlet property="leftImagevide" destination="4lC-7h-oBV" id="gOn-1Z-o1a"/>
                 <outlet property="titleLable" destination="zrf-Bz-itb" id="PQo-mp-nn9"/>
             </connections>
             <point key="canvasLocation" x="281.15942028985512" y="-60.602678571428569"/>
