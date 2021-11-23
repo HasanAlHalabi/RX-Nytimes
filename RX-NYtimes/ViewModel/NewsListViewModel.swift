@@ -9,7 +9,7 @@ import Foundation
 import RxCocoa
 import RxSwift
 class NewsListViewModel{
-    var newfetchdata = NewsRepoApi()
+    
     
     public enum homeError {
         case internetError (String)
@@ -20,7 +20,8 @@ class NewsListViewModel{
     public let error : PublishSubject<homeError> = PublishSubject()
 
     private let disposable = DisposeBag()
-   
+    
+    var newfetchdata = NewsRepoApi()
     public func requestData(time: Int){
     
     self.newfetchdata.fetchallData(nb: time){articles in

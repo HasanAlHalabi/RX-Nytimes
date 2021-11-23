@@ -11,10 +11,8 @@ class MessageCell: UITableViewCell {
 
     
     @IBOutlet weak var titleLable: UILabel!
-   
     @IBOutlet weak var imagev: UIImageView!
     @IBOutlet weak var DateText: UILabel!
-   
     @IBOutlet weak var ByName: UILabel!
     
     override func prepareForReuse() {

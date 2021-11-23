@@ -17,7 +17,7 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
        var bag = DisposeBag()
     
    
-    var newfetchdata = NewsRepoApi()
+   
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
         loadingIndicator.startAnimating();
 
         alert.view.addSubview(loadingIndicator)
-        present(alert, animated: true, completion: nil)
+        
         setupBinding()
         tableView.delegate = self
         tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
@@ -84,6 +84,7 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
     }
     //        MARK: - BINDING
     private func setupBinding(){
+        present(alert, animated: true, completion: nil)
         NewListVM.requestData(time: 1)
         
         NewListVM.news.bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)){ row,iten, cell in
@@ -96,7 +97,8 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return 133
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as! MessageCell
+        return cell.frame.height
         }
  
 }
