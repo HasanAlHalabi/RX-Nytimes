@@ -34,7 +34,7 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
         tableView.delegate = self
         tableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "MessageCell")
         tableView.separatorColor = UIColor.darkGray
-        tableView.separatorInset = .zero
+        tableView.separatorInset = UIEdgeInsets(top: 20,left: 20,bottom: 20,right: 20)
         navigationItem.title="Ny Time Most Popular Article"
 
        
@@ -45,14 +45,14 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
                     vc.titletext1 = news.title
                     vc.abstrack1 = news.abstract
                     vc.byLine = news.byline
-                   vc.imagelink = news.media?[0].metadata[2].url ?? "https://1000logos.net/wp-content/uploads/2017/04/Symbol-New-York-Times.png"
+                    vc.imagelink = news.media?.first?.metadata[2].url ?? "https://1000logos.net/wp-content/uploads/2017/04/Symbol-New-York-Times.png"
                            vc.updated = news.updated
                     vc.url1 = news.url
                     vc.keyword = news.adx_keywords
                     self.navigationController?.pushViewController(vc, animated: true)
 
 
-                    
+
                 }).disposed(by: bag)
     }
     //        MARK: - SEGMENT SELLECTION
@@ -87,20 +87,38 @@ class NewslistViewController: UIViewController, UITableViewDelegate{
         present(alert, animated: true, completion: nil)
         NewListVM.requestData(time: 1)
         
-        NewListVM.news.bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)){ row,iten, cell in
-            cell.news = iten
-            self.dismiss(animated: false, completion: nil)
+        NewListVM.news.asObserver()
+            .bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)){ row,iten, cell in
+                
+                
+                cell.accessoryType = .disclosureIndicator
+                        cell.clipsToBounds = true
+                            cell.news = iten
+                            self.dismiss(animated: false, completion: nil)
 
-                }.disposed(by: bag)
-       
+                                }.disposed(by: bag)
+//        NewListVM.news.bind(to: tableView.rx.items(cellIdentifier: "MessageCell", cellType: MessageCell.self)){ row,iten, cell in
+//            cell.news = iten
+//            self.dismiss(animated: false, completion: nil)
+//
+//                }.disposed(by: bag)
+//
     }
 
-    
+  
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MessageCell") as! MessageCell
+  
         return cell.frame.height
         }
- 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("i am sellected ")
+        let newsdetail = NewListVM.news.asObserver().map{$0[indexPath.row]}.self
+    
+        
+        print(newsdetail)
+    }
+   
 }
 
 

@@ -13,7 +13,4 @@ struct Postmetadata:Decodable{
         case  metadata = "media-metadata"
     }
 }
-struct metadataurl :Decodable{
-    var url: String
-    var format: String
-}
+
